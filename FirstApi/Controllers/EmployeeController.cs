@@ -17,9 +17,21 @@ namespace FirstApi.Controllers
 
         [HttpPost]
 
-        public IActionResult Add(EmployeeViewModel employeeView)
+        public IActionResult Add([FromForm] EmployeeViewModel employeeView)
         {
-            var employee = new Employee(employeeView.Name, employeeView.Age, null);
+            var directoryPath = Path.Combine("Storage");
+            var filePath = Path.Combine(directoryPath, employeeView.Photo.FileName);
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+
+            employeeView.Photo.CopyTo(fileStream);
+
+            var employee = new Employee(employeeView.Name, employeeView.Age, filePath);
 
             _employeeRepository.Add(employee);
 
