@@ -26,6 +26,8 @@
       - ConnectionStrings__DefaultConnection=Host=postgres-db;Port=5432;Database=employee_sample;Username=postgres;Password=postgres
     depends_on:
       - postgres
+    volumes:
+      - ./FirstApi/Storage:/app/Storage
     networks:
       - app-network
 
