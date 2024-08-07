@@ -44,5 +44,20 @@ namespace FirstApi.Controllers
             var emplyess = _employeeRepository.Get();
             return Ok(emplyess);
         }
+
+        [HttpPost]
+        [Route("{id}/download")]
+        public IActionResult DownloadPhoto(int id)
+        {
+            var employee = _employeeRepository.Get(id);
+
+            if (employee.photo == null) {
+                return new NotFoundObjectResult("User photo not found");
+            }
+
+            var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
+
+            return File(dataBytes, "image/png");
+        }
     }
 }
