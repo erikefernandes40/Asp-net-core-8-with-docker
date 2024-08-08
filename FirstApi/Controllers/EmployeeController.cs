@@ -1,4 +1,6 @@
-﻿using FirstApi.Application.ViewModel;
+﻿using AutoMapper;
+using FirstApi.Application.ViewModel;
+using FirstApi.Domain.DTOs;
 using FirstApi.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +13,13 @@ namespace FirstApi.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly ILogger<EmployeeController> _logger;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
+        public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger, IMapper mapper)
         {
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [Authorize]
@@ -64,6 +68,18 @@ namespace FirstApi.Controllers
             var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
 
             return File(dataBytes, "image/png");
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var employee = _employeeRepository.Get(id);
+
+            var employeeDto = _mapper.Map<EmployeeDto>(employee);
+
+            return Ok(employeeDto);
         }
     }
 }
