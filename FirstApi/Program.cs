@@ -1,6 +1,6 @@
 using FirstApi;
 using FirstApi.Application.Mapping;
-using FirstApi.Domain.Model;
+using FirstApi.Domain.Model.EmployeeAggregate;
 using FirstApi.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

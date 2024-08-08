@@ -1,6 +1,6 @@
 ﻿using FirstApi.Domain.DTOs;
 
-namespace FirstApi.Domain.Model
+namespace FirstApi.Domain.Model.EmployeeAggregate
 {
     public interface IEmployeeRepository
     {

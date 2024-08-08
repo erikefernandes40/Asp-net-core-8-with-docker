@@ -16,7 +16,7 @@ namespace FirstApi.Controllers
                 int age = 10;
                 string photo = "teste";
                 
-                var token = TokenService.GenerateToken(new Domain.Model.Employee(name, age, photo));
+                var token = TokenService.GenerateToken(new Domain.Model.EmployeeAggregate.Employee(name, age, photo));
 
                 return Ok(token);
             }

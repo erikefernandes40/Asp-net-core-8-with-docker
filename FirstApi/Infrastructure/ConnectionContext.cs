@@ -1,4 +1,4 @@
-﻿using FirstApi.Domain.Model;
+﻿using FirstApi.Domain.Model.EmployeeAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstApi.Infrastructure

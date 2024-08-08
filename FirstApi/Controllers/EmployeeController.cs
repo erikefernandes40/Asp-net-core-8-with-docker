@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FirstApi.Application.ViewModel;
 using FirstApi.Domain.DTOs;
-using FirstApi.Domain.Model;
+using FirstApi.Domain.Model.EmployeeAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

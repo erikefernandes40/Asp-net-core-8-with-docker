@@ -1,5 +1,5 @@
 ﻿using FirstApi.Domain.DTOs;
-using FirstApi.Domain.Model;
+using FirstApi.Domain.Model.EmployeeAggregate;
 
 namespace FirstApi.Infrastructure.Repository
 {
