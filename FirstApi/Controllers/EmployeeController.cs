@@ -1,11 +1,12 @@
 ﻿using FirstApi.Model;
 using FirstApi.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstApi.Controllers
 {
     [ApiController]
-    [Route("api/vi/employee")]
+    [Route("api/v1/employee")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -15,6 +16,7 @@ namespace FirstApi.Controllers
             _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
         }
 
+        [Authorize]
         [HttpPost]
 
         public IActionResult Add([FromForm] EmployeeViewModel employeeView)
@@ -38,6 +40,7 @@ namespace FirstApi.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -45,13 +48,14 @@ namespace FirstApi.Controllers
             return Ok(emplyess);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("{id}/download")]
         public IActionResult DownloadPhoto(int id)
         {
             var employee = _employeeRepository.Get(id);
 
-            if (employee.photo == null) {
+            if (employee?.photo == null) {
                 return new NotFoundObjectResult("User photo not found");
             }
 
