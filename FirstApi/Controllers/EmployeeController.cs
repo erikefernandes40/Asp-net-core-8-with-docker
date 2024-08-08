@@ -1,5 +1,5 @@
-﻿using FirstApi.Model;
-using FirstApi.ViewModel;
+﻿using FirstApi.Application.ViewModel;
+using FirstApi.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

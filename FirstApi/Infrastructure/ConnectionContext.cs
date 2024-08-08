@@ -1,6 +1,5 @@
-﻿using FirstApi.Model;
+﻿using FirstApi.Domain.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FirstApi.Infrastructure
 {
