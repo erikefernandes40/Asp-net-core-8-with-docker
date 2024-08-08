@@ -1,4 +1,5 @@
 using FirstApi;
+using FirstApi.Application.Mapping;
 using FirstApi.Domain.Model;
 using FirstApi.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
 var key = Encoding.ASCII.GetBytes(Key.Secret);
+
+builder.Services.AddAutoMapper(typeof(DomainToDtoMapping));
 
 builder.Services.AddAuthentication(x =>
 {
