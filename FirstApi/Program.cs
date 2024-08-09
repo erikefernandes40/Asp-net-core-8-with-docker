@@ -24,6 +24,17 @@ builder.Services.AddAutoMapper(typeof(DomainToDtoMapping));
 
 builder.Services.AddApiVersioning().AddMvc();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        name: "MyPolicy", policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -56,6 +67,8 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
+app.UseCors("MyPolicy");
 
 app.UseAuthentication();
 
