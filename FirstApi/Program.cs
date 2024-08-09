@@ -22,6 +22,8 @@ var key = Encoding.ASCII.GetBytes(Key.Secret);
 
 builder.Services.AddAutoMapper(typeof(DomainToDtoMapping));
 
+builder.Services.AddApiVersioning().AddMvc();
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

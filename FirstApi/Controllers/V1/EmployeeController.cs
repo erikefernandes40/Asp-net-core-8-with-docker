@@ -4,11 +4,13 @@ using FirstApi.Domain.DTOs;
 using FirstApi.Domain.Model.EmployeeAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
-namespace FirstApi.Controllers
+namespace FirstApi.Controllers.V1
 {
+    [ApiVersion(1.0)]
     [ApiController]
-    [Route("api/v1/employee")]
+    [Route("api/v{version:apiVersion}/employee")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -61,7 +63,8 @@ namespace FirstApi.Controllers
         {
             var employee = _employeeRepository.Get(id);
 
-            if (employee?.photo == null) {
+            if (employee?.photo == null)
+            {
                 return new NotFoundObjectResult("User photo not found");
             }
 

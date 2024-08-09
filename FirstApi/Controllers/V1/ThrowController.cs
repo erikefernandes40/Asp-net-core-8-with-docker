@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FirstApi.Controllers
+namespace FirstApi.Controllers.V1
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ThrowController : ControllerBase
@@ -16,7 +16,7 @@ namespace FirstApi.Controllers
         public IActionResult HandleErrorDevelopment(
             [FromServices] IHostEnvironment hostEnviroment)
         {
-            if(!hostEnviroment.IsDevelopment())
+            if (!hostEnviroment.IsDevelopment())
             {
                 return NotFound();
             }
