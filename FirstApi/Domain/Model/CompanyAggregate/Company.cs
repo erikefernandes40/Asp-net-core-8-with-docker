@@ -9,12 +9,5 @@ namespace FirstApi.Domain.Model.CompanyAggregate
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public Company(string name)
-        {
-            this.Name = name;
-        }
-
-
     }
 }
