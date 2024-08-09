@@ -7,5 +7,6 @@ namespace FirstApi.Domain.Model.EmployeeAggregate
         void Add(Employee employee);
         List<EmployeeDto> Get(int pageNumber, int pageQuantity);
         Employee? Get(int id);
+        Employee GetByEmail(string email);
     }
 }
