@@ -24,7 +24,6 @@ namespace FirstApi.Controllers.V1
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        [Authorize]
         [HttpPost]
 
         public IActionResult Add([FromForm] EmployeeViewModel employeeView)
@@ -41,7 +40,7 @@ namespace FirstApi.Controllers.V1
 
             employeeView.Photo.CopyTo(fileStream);
 
-            var employee = new Employee(employeeView.Name, employeeView.Age, filePath);
+            var employee = new Employee(employeeView.Name, employeeView.Age, filePath, employeeView.Password, employeeView.Email);
 
             _employeeRepository.Add(employee);
 
