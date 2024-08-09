@@ -13,6 +13,11 @@ namespace FirstApi.Infrastructure.Repository
             _context.SaveChanges();
         }
 
+        public Employee GetByEmail(string email)
+        {
+            return _context.Employees.FirstOrDefault(e => e.email == email);
+        }
+
         public List<EmployeeDto> Get(int pageNumber, int pageQuantity)
         {
             return _context.Employees.Skip(pageNumber * pageQuantity).Take(pageQuantity).Select(b => 
