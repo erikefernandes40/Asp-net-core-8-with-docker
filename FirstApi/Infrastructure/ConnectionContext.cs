@@ -1,4 +1,5 @@
-﻿using FirstApi.Domain.Model.EmployeeAggregate;
+﻿using FirstApi.Domain.Model.CompanyAggregate;
+using FirstApi.Domain.Model.EmployeeAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstApi.Infrastructure
@@ -6,6 +7,8 @@ namespace FirstApi.Infrastructure
     public class ConnectionContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Company> Company { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
