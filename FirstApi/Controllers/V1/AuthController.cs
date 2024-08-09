@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using FirstApi.Application.Services;
+using FirstApi.Domain.Model.EmployeeAggregate;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstApi.Controllers.V1
@@ -9,21 +10,27 @@ namespace FirstApi.Controllers.V1
     [Route("api/v{version:apiVersion}/auth")]
     public class AuthController : Controller
     {
-        [HttpPost]
-        public IActionResult Auth(string username, string password)
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public AuthController(IEmployeeRepository employeeRepository)
         {
-            if (username == "teste" && password == "teste")
+            _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
+        }
+
+        [HttpPost]
+        public IActionResult Auth(string email, string password)
+
+        {
+            var employeeExists = _employeeRepository.GetByEmail(email);
+
+            if(employeeExists == null || employeeExists.password != password)
             {
-                string name = username;
-                int age = 10;
-                string photo = "teste";
-
-                var token = TokenService.GenerateToken(new Domain.Model.EmployeeAggregate.Employee(name, age, photo));
-
-                return Ok(token);
+                return BadRequest("Username or password invalid");
             }
 
-            return BadRequest("Username or password invalid");
+                var token = TokenService.GenerateToken(new Domain.Model.EmployeeAggregate.Employee(employeeExists.name, employeeExists.age, employeeExists?.photo, employeeExists.password, employeeExists.email));
+
+                return Ok(token);
         }
     }
 }
